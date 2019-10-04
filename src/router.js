@@ -56,7 +56,8 @@ const router = new Router({
               name: "analysis",
               component: () =>
                 import(
-                  /* webpackChunkName: "dashboard" */ "./views/Dashboard/Analysis"
+                  /* webpackChunkName: "dashboard" */
+                  "./views/Dashboard/Analysis"
                 )
             }
           ]
@@ -88,7 +89,8 @@ const router = new Router({
                   name: "info",
                   component: () =>
                     import(
-                      /* webpackChunkName: "form" */ "./views/Forms/StepForm/Step1"
+                      /* webpackChunkName: "form" */
+                      "./views/Forms/StepForm/Step1"
                     )
                 },
                 {
@@ -96,7 +98,8 @@ const router = new Router({
                   name: "confirm",
                   component: () =>
                     import(
-                      /* webpackChunkName: "form" */ "./views/Forms/StepForm/Step2"
+                      /* webpackChunkName: "form" */
+                      "./views/Forms/StepForm/Step2"
                     )
                 },
                 {
@@ -104,7 +107,8 @@ const router = new Router({
                   name: "result",
                   component: () =>
                     import(
-                      /* webpackChunkName: "form" */ "./views/Forms/StepForm/Step3"
+                      /* webpackChunkName: "form" */
+                      "./views/Forms/StepForm/Step3"
                     )
                 }
               ]
@@ -122,12 +126,16 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  NProgress.start();
+  if (to.path !== from.path) {
+    NProgress.start();
+  }
   next();
 });
 
-router.afterEach(() => {
-  NProgress.done();
+router.afterEach((to, from) => {
+  if (to.path !== from.path) {
+    NProgress.done();
+  }
 });
 
 export default router;
