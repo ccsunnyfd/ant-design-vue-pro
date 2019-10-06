@@ -1,5 +1,5 @@
 <template>
-  <div ref="chartDom" style="height: 400px;"></div>
+  <div ref="chartDom"></div>
 </template>
 
 <script>
@@ -7,31 +7,30 @@ import echarts from "echarts";
 import debounce from "lodash/debounce";
 import { addListener, removeListener } from "resize-detector";
 export default {
+  props: {
+    option: {
+      type: Object,
+      default: () => {},
+    },
+  },
+  watch: {
+    option(val) {
+      this.chart.setOption(val);
+    }, // 只是改option里面的data的具体值时是监测不到变化的，需要深度监听。
+    // 避免深度监听耗费性能的一个做法是在父组件定时器修改传值时做一个浅拷贝
+    // option: {
+    //   handler(val) {
+    //     this.chart.setOption(val);
+    //   },
+    //   deep: true,
+    // }, // 深度监听的做法，但是非常耗性能
+  },
   created() {
     this.resize = debounce(this.resize, 300);
   },
   mounted() {
-    // 基于准备好的dom，初始化echarts实例
-    this.chart = echarts.init(this.$refs.chartDom);
+    this.renderChart();
     addListener(this.$refs.chartDom, this.resize);
-    // 绘制图表
-    this.chart.setOption({
-      title: {
-        text: "ECharts 入门示例",
-      },
-      tooltip: {},
-      xAxis: {
-        data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
-      },
-      yAxis: {},
-      series: [
-        {
-          name: "销量",
-          type: "bar",
-          data: [5, 20, 36, 10, 10, 20],
-        },
-      ],
-    });
   },
   beforeDestroy() {
     removeListener(this.$refs.chartDom, this.resize);
@@ -42,6 +41,12 @@ export default {
     resize() {
       console.log("resize");
       this.chart.resize();
+    },
+    renderChart() {
+      // 基于准备好的dom，初始化echarts实例
+      this.chart = echarts.init(this.$refs.chartDom);
+      // 绘制图表
+      this.chart.setOption(this.option);
     },
   },
   name: "",
