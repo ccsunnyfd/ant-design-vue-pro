@@ -37,7 +37,7 @@
 export default {
   data() {
     return {
-      visible: false
+      visible: false,
     };
   },
   methods: {
@@ -46,8 +46,8 @@ export default {
     },
     handleSettingChange(type, value) {
       this.$router.push({ query: { ...this.$route.query, [type]: value } });
-    }
-  }
+    },
+  },
 };
 </script>
 
