@@ -11,6 +11,7 @@ import {
   Menu,
   Form,
   Input,
+  Select,
 } from "ant-design-vue";
 import Authorized from "@/components/Authorized";
 import Auth from "@/directives/auth";
@@ -28,6 +29,7 @@ Vue.use(Radio);
 Vue.use(Menu);
 Vue.use(Form);
 Vue.use(Input);
+Vue.use(Select);
 Vue.component("Authorized", Authorized);
 Vue.use(Auth);
 
