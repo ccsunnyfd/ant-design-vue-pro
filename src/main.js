@@ -33,6 +33,12 @@ Vue.use(Select);
 Vue.component("Authorized", Authorized);
 Vue.use(Auth);
 
+const IconFont = Icon.createFromIconfontCN({
+  scriptUrl: "//at.alicdn.com/t/font_1453752_4r47jtu3irw.js",
+});
+
+Vue.component("IconFont", IconFont);
+
 new Vue({
   router,
   store,
