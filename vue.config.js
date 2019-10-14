@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 const AntDesignThemePlugin = require("antd-theme-webpack-plugin");
 
 const options = {
@@ -27,7 +28,7 @@ module.exports = {
     },
   },
   configureWebpack: {
-    plugins: [themePlugin],
+    plugins: [themePlugin, new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
     // resolve: {
     //   alias: {
     //     "@ant-design/icons/lib/dist$": path.resolve(
