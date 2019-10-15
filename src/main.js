@@ -6,6 +6,8 @@ import store from "./store/index.js";
 import enUS from "@/locale/enUS";
 import zhCN from "@/locale/zhCN";
 import queryString from "query-string";
+import VueHighlightJS from "vue-highlightjs";
+import "highlight.js/styles/github.css";
 import {
   Button,
   Layout,
@@ -43,6 +45,7 @@ Vue.use(DatePicker);
 Vue.component("Authorized", Authorized);
 Vue.use(Auth);
 Vue.use(VueI18n);
+Vue.use(VueHighlightJS);
 
 const i18n = new VueI18n({
   locale: queryString.parse(location.search).locale || "zhCN",
